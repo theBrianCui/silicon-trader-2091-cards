@@ -19,11 +19,27 @@
     [
         {
             "name": "Refined Metals",
-            "value": 6,
+            "value": 8,
             "cost": 2,
-            "requires": [
-                ["Metal Ore", 1]
-            ]
+            "requires": {
+                "Metal Ore": 1
+            }
+        },
+        {
+            "name": "Filtered Chemicals",
+            "value": 7,
+            "cost": 2,
+            "requires": {
+                "Unfiltered Chemicals": 1
+            }
+        },
+        {
+            "name": "Stable Gas",
+            "value": 6,
+            "cost": 1,
+            "requires": {
+                "Unstable Gas": 1
+            }
         }
     ]
 ]
