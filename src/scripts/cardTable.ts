@@ -6,7 +6,7 @@ export default function(cardCollection: Collection): HTMLTableElement {
     const header = DOM.createChild(root, 'tr');
 
     // Create table header
-    const columns = ["Tier", "Name", "Upkeep", "Prod. Cost", "Requirements", "Total Cost", "Value", "Max Profit"];
+    const columns = ["Tier", "Name", "Factory Upkeep", "Prod. Cost", "Requirements", "Total Cost", "Value", "Max Profit", "Notes"];
     for (const columnName of columns) {
         DOM.createChildWithText(header, 'th', columnName);
     }
@@ -49,7 +49,10 @@ export default function(cardCollection: Collection): HTMLTableElement {
             DOM.createChildWithText(row, 'td', card.value.toString());
 
             // Max Profit
-            DOM.createChildWithText(row, 'td', `${card.value - cardTotalCost}`)
+            DOM.createChildWithText(row, 'td', `${card.value - cardTotalCost}`);
+            
+            // Notes
+            DOM.createChildWithText(row, 'td', card.notes || '');
         }
 
         tier++;

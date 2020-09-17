@@ -8,6 +8,7 @@ export interface Card {
     requires?: {
         [key: string]: number
     }
+    notes?: string
 }
 
 export type Deck = Card[];
