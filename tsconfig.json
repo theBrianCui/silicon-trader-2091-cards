@@ -2,6 +2,7 @@
     "compilerOptions": {
         "resolveJsonModule": true,
         "esModuleInterop": true,
-        "lib": ["DOM", "ES6"]
+        "lib": ["DOM", "ES6"],
+        "noImplicitAny": true
     }
 }

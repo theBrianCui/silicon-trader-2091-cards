@@ -1,5 +1,5 @@
 import DOM from "./dom";
-import { Collection, Deck, Card } from "./cards";
+import { Collection, Deck, Card, getCardFromCollection, getRequirements } from "./cards";
 
 export default function(cardCollection: Collection): HTMLTableElement {
     const root = DOM.createElement('table') as HTMLTableElement;
@@ -28,7 +28,14 @@ export default function(cardCollection: Collection): HTMLTableElement {
             DOM.createChildWithText(row, 'td', card.cost.toString());
 
             // Requirements
-            DOM.createChildWithText(row, 'td', '');
+            const requirements: [Card, number][] = getRequirements(card, cardCollection);
+            const requirementsCell = DOM.createChild(row, 'td');
+            if (requirements.length > 0) {
+                const requirementsList = DOM.createChild(requirementsCell, 'ul');
+                for (const requirement of requirements) {
+                    DOM.createChildWithText(requirementsList, 'li', `${requirement[0].name} (${requirement[1]})`);
+                }
+            }
 
             // Total Cost
             const cardTotalCost = totalCost(card, cardCollection, costMap);
@@ -45,36 +52,15 @@ export default function(cardCollection: Collection): HTMLTableElement {
     }
 
     // Compute total costs
-    function getCard(name: string, collection: Collection): Card {
-        for (const deck of collection) {
-            for (const card of deck) {
-                if (card.name === name) {
-                    return card;
-                }
-            }
-        }
-
-        throw new Error(`Card ${name} was not found in collection ${collection}`);
-    }
-
     function totalCost(card: Card, collection: Collection, costMap: Map<Card, number>): number {
         if (costMap.has(card)) {
             return costMap.get(card);
         }
 
-        if (!card.requires) {
-            costMap.set(card, card.cost);
-            return card.cost;
-        }
-
+        const requirements: [Card, number][] = getRequirements(card, collection);
         let sumCost = card.cost;
-        for (const requirement in card.requires) {
-            if (!card.requires.hasOwnProperty(requirement)) {
-                continue;
-            }
-
-            const requiredCard: Card = getCard(requirement, collection);
-            sumCost += totalCost(requiredCard, collection, costMap);
+        for (const [requiredCard, quantity] of requirements) {
+            sumCost += (totalCost(requiredCard, collection, costMap) * quantity);
         }
 
         costMap.set(card, sumCost);
