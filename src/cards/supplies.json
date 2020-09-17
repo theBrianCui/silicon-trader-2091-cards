@@ -2,12 +2,12 @@
     [
         {
             "name": "Metal Ore",
-            "value": 5,
-            "cost": 2
+            "value": 4,
+            "cost": 1
         },
         {
             "name": "Unfiltered Chemicals",
-            "value": 4,
+            "value": 5,
             "cost": 2
         },
         {
@@ -19,7 +19,7 @@
     [
         {
             "name": "Refined Metals",
-            "value": 8,
+            "value": 6,
             "cost": 2,
             "requires": {
                 "Metal Ore": 1
