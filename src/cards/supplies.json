@@ -2,7 +2,7 @@
     [
         {
             "name": "Metal Ore",
-            "value": 3,
+            "value": 4,
             "cost": 1,
             "upkeep": 0,
             "notes": "Cheap to acquire and cheap to sustain."
@@ -25,7 +25,7 @@
     [
         {
             "name": "Refined Metals",
-            "value": 7,
+            "value": 8,
             "cost": 1,
             "upkeep": 1,
             "requires": {
@@ -35,7 +35,7 @@
         },
         {
             "name": "Filtered Chemicals",
-            "value": 7,
+            "value": 9,
             "cost": 2,
             "upkeep": 1,
             "requires": {
@@ -45,7 +45,7 @@
         },
         {
             "name": "Stable Gas",
-            "value": 8,
+            "value": 9,
             "cost": 3,
             "upkeep": 0,
             "requires": {
@@ -57,23 +57,25 @@
     [
         {
             "name": "Ion Gas",
-            "value": 15,
+            "value": 18,
             "cost": 2,
-            "upkeep": 0,
+            "upkeep": 1,
             "requires": {
                 "Stable Gas": 1,
                 "Filtered Chemicals": 1
-            }
+            },
+            "notes": "Stable and minimal upkeep, but relatively low value."
         },
         {
             "name": "Golden Dust",
-            "value": 21,
+            "value": 22,
             "cost": 4,
             "upkeep": 3,
             "requires": {
                 "Filtered Chemicals": 1,
                 "Refined Metals": 1
-            }
+            },
+            "notes": "High value, high production cost, highly addictive, somewhat illegal."
         },
         {
             "name": "Proto-Gel",
@@ -81,19 +83,34 @@
             "cost": 3,
             "upkeep": 2,
             "requires": {
-                "Unfiltered Chemicals": 2,
-                "Stable Gas": 2
-            }
+                "Unfiltered Chemicals": 1,
+                "Stable Gas": 1,
+                "Refined Metals": 1
+            },
+            "notes": "All purpose conductive filler 'gel' with moderate production cost."
         },
         {
             "name": "Nanocircuits",
             "value": 24,
             "cost": 5,
-            "upkeep": 1,
+            "upkeep": 2,
             "requires": {
                 "Filtered Chemicals": 1,
                 "Unstable Gas": 1,
                 "Refined Metals": 2
+            },
+            "notes": "Microscopic circuitry used for complex and advanced applications."
+        }
+    ],
+    [
+        {
+            "name": "Nanofabricator",
+            "value": 52,
+            "cost": 6,
+            "upkeep": 2,
+            "requires": {
+                "Nanocircuits": 1,
+                "Proto-Gel": 1
             }
         }
     ]
