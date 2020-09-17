@@ -4,6 +4,7 @@ export interface Card {
     name: string,
     value: number,
     cost: number,
+    upkeep: number,
     requires?: {
         [key: string]: number
     }

@@ -6,7 +6,7 @@ export default function(cardCollection: Collection): HTMLTableElement {
     const header = DOM.createChild(root, 'tr');
 
     // Create table header
-    const columns = ["Tier", "Name", "Base Cost", "Requirements", "Total Cost", "Value", "Max Profit"];
+    const columns = ["Tier", "Name", "Upkeep", "Prod. Cost", "Requirements", "Total Cost", "Value", "Max Profit"];
     for (const columnName of columns) {
         DOM.createChildWithText(header, 'th', columnName);
     }
@@ -17,6 +17,7 @@ export default function(cardCollection: Collection): HTMLTableElement {
     for (const deck of cardCollection) {
         for (const card of deck) {
             const row = DOM.createChild(root, 'tr');
+            row.classList.add(`tier-${tier}`);
 
             // Tier
             DOM.createChildWithText(row, 'td', tier.toString());
@@ -24,7 +25,10 @@ export default function(cardCollection: Collection): HTMLTableElement {
             // Name
             DOM.createChildWithText(row, 'td', card.name);
 
-            // Base Cost
+            // Upkeep
+            DOM.createChildWithText(row, 'td', card.upkeep.toString());
+
+            // Prod. Cost
             DOM.createChildWithText(row, 'td', card.cost.toString());
 
             // Requirements
@@ -58,7 +62,7 @@ export default function(cardCollection: Collection): HTMLTableElement {
         }
 
         const requirements: [Card, number][] = getRequirements(card, collection);
-        let sumCost = card.cost;
+        let sumCost = card.cost + card.upkeep;
         for (const [requiredCard, quantity] of requirements) {
             sumCost += (totalCost(requiredCard, collection, costMap) * quantity);
         }
